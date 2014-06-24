@@ -68,7 +68,7 @@ def get_repo_path(repo_name, workdir):
 
 def init_repos(repos, workdir):
     for repo in repos:
-        url = repo.ssh_url
+        url = repo.clone_url
         gitdir = git.Repo.init(get_repo_path(repo.name, workdir), bare=True)
         # Cleanup existing origin, if any
         try:
@@ -84,5 +84,5 @@ def fetch(repos, workdir):
     for repo in repos:
         path = get_repo_path(repo.name, workdir)
         gitdir = git.Repo.init(path, bare=True)
-        print ("Fetching %s in %s..." % (repo.ssh_url, path))
+        print ("Fetching %s in %s..." % (repo.clone_url, path))
         gitdir.git.fetch(REMOTE_NAME)
